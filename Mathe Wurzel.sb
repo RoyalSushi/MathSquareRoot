@@ -1,0 +1,433 @@
+TextWindow.Title = "Math Square Root Calculator"
+TextWindow.WriteLine("Um zu erfahren, welche Zahl man mit sich selbst multiplizieren muss, um die von Ihnen eingegebene Zahl zu erhalten, einfach eine beliebige Zahl eingeben.")
+
+start:
+TextWindow.Write("Bitte Zahl eingeben: ")
+TextWindow.ForegroundColor = "green"
+
+'Eingabe auslesen (num1)
+num1 = TextWindow.ReadNumber()
+TextWindow.ForegroundColor = "White"
+
+' Definitionbereich: nichtnegative reelle Zahlen
+' Einschränkung:     9 Quintillionen-Grenze
+If (num1<0) then
+  ex:
+  TextWindow.WriteLine("")
+  TextWindow.ForegroundColor = "Red"
+  TextWindow.WriteLine("FEHLER! Aus der von Ihnen gewählten Zahl kann keine Wurzel gezogen werden. Dies kann folgende Gründe haben:")
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("- Ihre Zahl war negativ.")
+  TextWindow.WriteLine("- Die von Ihnen gewählte Zahl ist zu groß.")
+  TextWindow.WriteLine("  Mit dieser Software ist die Wurzelberechnung auf Zahlen beschränkt,")
+  TextWindow.WriteLine("  die kleiner als 9 Quintillionen sind.")
+  TextWindow.WriteLine("")
+  TextWindow.ForegroundColor = "Yellow"
+  TextWindow.WriteLine("Wiederholen Sie die Eingabe.")
+  TextWindow.ForegroundColor = "White"
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("Mit beliebiger Taste fortfahren...")
+  TextWindow.PauseWithoutMessage()
+  TextWindow.Clear()
+  Goto start
+  
+ elseif(num1 <> 0 And Math.SquareRoot(num1) = 0)Then 
+  Goto ex
+else
+  
+'Wurzel
+num2 = math.SquareRoot(num1)
+
+TextWindow.WriteLine("")
+
+If (num2 = Math.Floor(num2 * 1000.0) / 1000.0 + 0.0001 - 0.0001) Then
+  TextWindow.WriteLine("Das Ergebnis ist genau " + num2 + ".")
+Else
+  TextWindow.WriteLine("Das Ergebnis ist etwa " + Math.Floor(num2 * 1000.0) / 1000.0 + "...")
+EndIf
+ endif
+
+begin2:
+TextWindow.WriteLine("")
+Dödel:
+TextWindow.WriteLine("")
+TextWindow.WriteLine("Sie haben folgende Auswahlmöglichkeiten:")
+TextWindow.ForegroundColor = "White"
+TextWindow.WriteLine("")
+TextWindow.WriteLine("(1) Bisektion und Heron-Verfahren (Annäherungsverfahren)") 
+TextWindow.WriteLine("")
+TextWindow.WriteLine("(2) Neue Zahl") 
+TextWindow.WriteLine("")
+TextWindow.WriteLine("(3) Schließen")
+TextWindow.WriteLine("")
+
+I = TextWindow.ReadNumber()
+
+'Auswahl: Bisektion und Heron-Verfahren
+If (I = 1) Then
+  TextWindow.Clear()
+  b:
+textwindow.WriteLine("Aufgabe:" + "  " + "Quadratwurzel aus " + num1)
+
+If (num2 = Math.Floor(num2 * 1000.0) / 1000.0 + 0.0001 - 0.0001) Then
+  TextWindow.WriteLine("Ergebnis: " + num2)
+Else
+  TextWindow.WriteLine("Ergebnis: " + Math.Floor(num2 * 1000.0) / 1000.0 + "...")
+EndIf
+
+TextWindow.WriteLine("")
+TextWindow.WriteLine("")
+TextWindow.ForegroundColor = "Yellow"
+TextWindow.WriteLine("Annäherungsverfahren")
+TextWindow.ForegroundColor = "White"
+TextWindow.WriteLine("")
+
+'Grenzensetzung
+If (num1=0) Then
+  u1=0
+  o=0
+Else
+  u1=Math.Floor(Math.SquareRoot(num1))
+  o=Math.Floor(Math.SquareRoot(num1)+1)
+EndIf
+
+  TextWindow.WriteLine("Mögliche Grenzen:")
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("linke Grenze: "+u1)
+  TextWindow.WriteLine("rechte Grenze: "+o)
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("Wollen Sie diese Werte beibehalten? (ja = 1 / nein = 2)")
+  hm=TextWindow.Read()
+
+If (hm=1) Then
+  TextWindow.Clear()
+  TextWindow.WriteLine("Ihre Zahl: "+num1)
+  TextWindow.WriteLine("linke Grenze: "+u1)
+  TextWindow.WriteLine("rechte Grenze: "+o)
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("")
+  TextWindow.ForegroundColor = "Yellow"
+  TextWindow.WriteLine("Bisektion")
+  TextWindow.ForegroundColor = "White"
+    TextWindow.WriteLine("")
+    Goto Bisektion
+  EndIf
+  
+  If (hm=2) Then
+    TextWindow.WriteLine("")
+    TextWindow.Write("neue linke Grenze: ")
+    u1=TextWindow.ReadNumber()
+    TextWindow.Write("neue rechte Granze: ")
+    o=TextWindow.ReadNumber()
+    TextWindow.Clear()
+  TextWindow.WriteLine("linke Grenze: "+u1)
+  TextWindow.WriteLine("rechte Grenze: "+o)
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("")
+  TextWindow.ForegroundColor = "Yellow"
+  TextWindow.WriteLine("Bisektion")
+  TextWindow.ForegroundColor = "White"
+  TextWindow.WriteLine("")
+    
+If (Math.Power(u1,2)>num1 Or Math.Power(o,2)<num1) Then
+  TextWindow.WriteLine("")
+  TextWindow.ForegroundColor = "Red"
+  TextWindow.WriteLine("FEHLER! Wiederholen Sie die Eingabe.")
+  TextWindow.WriteLine("Mit beliebiger Taste fortfahren...")
+  TextWindow.PauseWithoutMessage()
+  TextWindow.Clear()
+      Goto b
+    EndIf
+  EndIf
+  
+  If (hm>2 Or hm<1) Then
+    TextWindow.WriteLine("")
+    TextWindow.ForegroundColor = "Red"
+  TextWindow.WriteLine("FEHLER! Wiederholen Sie die Eingabe.")
+  TextWindow.WriteLine("Mit beliebiger Taste fortfahren...")
+  TextWindow.PauseWithoutMessage()
+  TextWindow.Clear()
+  Goto Dödel
+  EndIf
+EndIf
+TextWindow.WriteLine("")
+
+'Auswahl: Neue Zahl
+If (I = 2) Then
+  TextWindow.Clear()
+Goto start
+EndIf
+
+'Auswahl: END
+If (I = 3) Then
+  TextWindow.Clear()
+  TextWindow.ForegroundColor = "Blue"
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("Vielen Dank für die Verwnedung dieses Programmes")
+  TextWindow.WriteLine("Dieses Programm entstand durch Tim L. und RS; 2011")
+  TextWindow.WriteLine("")
+  TextWindow.ForegroundColor = "White"
+  TextWindow.WriteLine("Drücken Sie eine beliebige Taste...")
+  textwindow.PauseWithoutMessage() 
+  Program.End()
+EndIf 
+'Exception
+If (I> 3 Or I < 1)Then
+  TextWindow.WriteLine("")
+  TextWindow.ForegroundColor = "Red"
+  TextWindow.WriteLine("FEHLER! Wiederholen Sie die Eingabe.")
+  TextWindow.WriteLine("Mit beliebiger Taste fortfahren...")
+  TextWindow.PauseWithoutMessage()
+  TextWindow.Clear()
+  Goto Dödel
+EndIf
+
+
+Bisektion: 
+'linke Grenze
+u=Math.Floor(u1 * 100000.0) / 100000.0 + 0.00001 - 0.00001
+'rechte Grenze
+o=Math.Floor(o * 100000.0) / 100000.0 + 0.00001 - 0.00001
+'mitte
+m = Math.Floor((u1 + o)/2 * 100000.0) / 100000.0 + 0.00001 - 0.00001
+'quadrat
+q = Math.Floor(m * m * 100000.0) / 100000.0 + 0.00001 - 0.00001
+
+z= 1 
+a = ""
+b = ""
+c = ""
+
+for y =1 to text.getlength(Math.Floor(u))
+  y = y+1
+    If text.getlength(Math.Floor(u)) <> 1 then 
+      a = a + " "
+        Endif
+endfor
+for y =1 to text.getlength(Math.Floor(o)) + (text.getlength(Math.Floor(u))) -2
+  y = y+1
+  If text.getlength(Math.Floor(o)) <> 1 then 
+    b = b + " "
+  Endif
+endfor
+
+for y =1 to text.getlength(Math.Floor(m)) + text.getlength(Math.Floor(o)) + text.getlength(Math.Floor(u)) - 2
+ y = y+1
+c = c + " "
+endfor
+TextWindow.WriteLine("Nr   linke Grenze      "+ a +"rechte Grenze      "+b+"Mitte        "+c+"Quadrat")
+If z < 10 Then
+  TextWindow.Write(Text.Append("0",z))
+Else
+  TextWindow.Write(z)
+EndIf
+
+TextWindow.Write("   "+u)
+TextWindow.Write("           "+o)
+TextWindow.Write("            "+m)
+TextWindow.WriteLine("       "+q)
+
+If ((Math.Abs(q-num1))<=0.1) Then
+    If m = Math.Floor(m) Then 
+    TextWindow.WriteLine("Die Wurzel aus " + num1 + " ist genau: " + math.Floor(m))
+  Else
+    TextWindow.WriteLine("Die Wurzel aus " + num1 + " ist etwa: " + math.Floor(m))
+    Goto beginHeron
+  TextWindow.WriteLine("")
+  EndIf
+Else
+
+ablauf:
+
+If (q>num1) Then
+u=u
+o=m
+m = Math.Floor((u + o)/2 * 100000.0) / 100000.0 + 0.00001 - 0.00001
+q = Math.Floor(m * m * 100000.0) / 100000.0 + 0.00001 - 0.00001
+z=z+1
+TextWindow.WriteLine("")
+If z < 10 Then
+  TextWindow.Write(Text.Append("0",z))
+Else
+  TextWindow.Write(z)
+EndIf
+TextWindow.Write("   "+u)
+TextWindow.Write("           "+o)
+TextWindow.Write("            "+m)
+TextWindow.WriteLine("       "+q)
+
+Else
+  
+  u=m
+  o=o
+m = Math.Floor((u + o)/2 * 100000.0) / 100000.0 + 0.00001 - 0.00001
+q = Math.Floor(m * m * 100000.0) / 100000.0 + 0.00001 - 0.00001
+z=z+1
+TextWindow.WriteLine("")
+If z < 10 Then
+  TextWindow.Write(Text.Append("0",z))
+Else
+  TextWindow.Write(z)
+EndIf
+TextWindow.Write("   "+u)
+TextWindow.Write("           "+o)
+TextWindow.Write("            "+m)
+TextWindow.WriteLine("       "+q)
+EndIf
+
+If ((Math.Abs(q-num1))<=0.1) Then
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("Finished")
+  If m = Math.Floor(m) Then 
+    TextWindow.WriteLine("Die Wurzel aus " + num1 + " ist genau: " + math.Floor(m))
+  Else
+    TextWindow.WriteLine("Die Wurzel aus " + num1 + " ist etwa: " + math.Floor(m))
+  Goto beginheron
+  TextWindow.WriteLine("")
+  EndIf
+ElseIf (z>79) then
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("ABBRUCH! Ihre Zahl war zu groß!")
+  TextWindow.WriteLine("Ihre Zahl war:")
+  TextWindow.WriteLine(num1)
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("Wurzel: ")
+  
+  If (num2 = Math.Floor(num2 * 1000.0) / 1000.0 + 0.0001 - 0.0001) Then
+  TextWindow.Write(num2)
+Else
+  TextWindow.Write("etwa " + Math.Floor(num2 * 1000.0) / 1000.0 + "...")
+endif
+
+TextWindow.WriteLine("")
+TextWindow.WriteLine("")
+
+  Goto beginheron
+Else
+  Goto ablauf
+EndIf
+
+EndIf
+
+
+beginHeron:
+  TextWindow.WriteLine("")
+  TextWindow.ForegroundColor = "Yellow"
+  TextWindow.WriteLine("Heron-Verfahren")
+  TextWindow.ForegroundColor = "White"
+  TextWindow.WriteLine("")
+  
+  'Variablen
+  c = 1
+  If u1 > 0 then
+    s = Math.Floor(u1 * 1000.0) / 1000.0 + 0.00001 - 0.00001
+    b = Math.Floor(num1 / s * 100000.0) / 100000.0 + 0.00001 - 0.00001
+    q = (Math.Power(s,2) * 100000.0) / 100000.0 + 0.00001 - 0.00001
+  ElseIf o > 0 then
+    s = Math.Floor(o * 1000.0) / 1000.0 + 0.0001 - 0.0001
+    b = Math.Floor(num1 / s * 100000.0) / 100000.0 + 0.00001 - 0.00001
+    q = (Math.Power(s,2) * 100000.0) / 100000.0 + 0.00001 - 0.00001
+  Else
+    s = 0.0000
+    b = 0.0000
+    q = 0.0000
+  EndIf
+
+  
+  a = ""
+  d = ""
+  
+  'Einrückung
+  for y =1 to text.getlength(Math.Floor(u))
+    y = y+1
+    If text.getlength(Math.Floor(u)) <> 1 then 
+      a = a + " "
+      Endif
+    endfor
+for y =1 to text.getlength(Math.Floor(o)) + (text.getlength(Math.Floor(u))) -2
+  y = y+1
+  If text.getlength(Math.Floor(q)) <> 1 then 
+    d = d + " "
+  Endif
+endfor
+
+TextWindow.WriteLine("Seite a           "+a+"Seite b             "+d+"Quadrat")   
+  TextWindow.Write(s) 
+  TextWindow.Write("           "+b)
+  TextWindow.WriteLine("             "+q)
+  
+  If ((Math.Abs(q-num1))<0.1) Then
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("Finished")
+  If s = Math.Floor(s) Then 
+    TextWindow.WriteLine("Die Wurzel aus " + num1 + " ist genau: " + math.Floor(s))
+  Else
+    TextWindow.WriteLine("Die Wurzel aus " + num1 + " ist etwa: " + math.Floor(s))
+  Goto Fortsetzen
+  TextWindow.WriteLine("")
+  EndIf
+else
+  h:
+c = c+1
+s = Math.Floor((s+b)/2 * 100000.0) / 100000.0 + 0.00001 - 0.00001
+b = Math.Floor(num1 / s * 100000.0) / 100000.0 + 0.00001 - 0.00001
+q = Math.Floor(Math.Power(s,2) * 100000.0) / 100000.0 + 0.00001 - 0.00001
+
+TextWindow.WriteLine("")
+TextWindow.Write(s) 
+TextWindow.Write("           "+b)
+TextWindow.WriteLine("             "+q)
+
+  If ((Math.Abs(q-num1))<0.1)Then
+    TextWindow.WriteLine("")
+    TextWindow.WriteLine("Finished")
+   If s = Math.Floor(s) Then  
+    TextWindow.WriteLine("Die Wurzel aus " + num1 + " ist genau: " + math.Floor(s))
+  Else
+    TextWindow.WriteLine("Die Wurzel aus " + num1 + " ist etwa: " + math.Floor(s))
+  Goto Fortsetzen
+  TextWindow.WriteLine("")
+  EndIf
+  ElseIf (c>79) then
+    TextWindow.WriteLine("")
+  TextWindow.WriteLine("ABBRUCH! Ihre Zahl war zu groß!")
+  TextWindow.WriteLine("Ihre Zahl war:")
+  TextWindow.WriteLine(num1)
+  TextWindow.WriteLine("")
+  TextWindow.WriteLine("Wurzel: ")
+    
+  If (num2 = Math.Floor(num2 * 1000.0) / 1000.0 + 0.0001 - 0.0001) Then
+  TextWindow.Write(num2)
+Else
+  TextWindow.Write("etwa " + Math.Floor(num2 * 1000.0) / 1000.0 + "...")
+endif
+
+TextWindow.WriteLine("")
+TextWindow.WriteLine("")
+
+    Goto Fortsetzen
+  Else
+    Goto h
+  EndIf
+  EndIf
+  
+Fortsetzen:  
+TextWindow.WriteLine("")
+TextWindow.WriteLine("")
+TextWindow.WriteLine("")
+TextWindow.ForegroundColor = "Yellow"
+TextWindow.WriteLine("(1) Neue Zahl   (...) Schließen")
+TextWindow.ForegroundColor = "White"
+z = TextWindow.Read()
+If (z = 1) Then
+  TextWindow.Clear()
+  Goto start
+Else
+  TextWindow.Clear()
+  TextWindow.WriteLine("Dieses Programm entstand durch Tim L. und RS.")
+  TextWindow.WriteLine("Drücken Sie eine beliebige Taste...")
+  textwindow.PauseWithoutMessage() 
+  Program.End()
+  EndIf
